@@ -96,6 +96,23 @@ string GerarToken(Admin admin) {
     return new JwtSecurityTokenHandler().WriteToken(token);
 }
 
+app.MapPost("admin/login", ([FromBody] LoginDTO loginDTO, IAdminServico adminServico) => {
+    var login = adminServico.Login(loginDTO);
+    if (login != null) {
+        string token = GerarToken(login);
+        return Results.Ok(new AdminLogado {
+            Email = login.Email,
+            Perfil = login.Perfil,
+            Token = token
+        });
+    }
+    else {
+        return Results.Unauthorized();
+    }
+})
+.WithTags("Admin")
+.AllowAnonymous();
+
 app.MapPost("admin", ([FromBody] AdminDTO adminDTO, IAdminServico adminServico) => {
     var validacoes = new ErrosDeValidacao{
         Mensagens = new List<string>()
@@ -265,7 +282,7 @@ app.MapGet("/veiculos/{id}", ([FromRoute]int id, IVeiculoServico veiculoServico)
 })
 .RequireAuthorization()
 .RequireAuthorization(new AuthorizeAttribute { Roles = "admin, editor "})
-.WithTags("Admin");
+.WithTags("Admin"); 
 #endregion
 
 app.UseSwagger();
