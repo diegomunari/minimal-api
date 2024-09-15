@@ -1,0 +1,12 @@
+
+using MinimalApi.Dominio.Enums;
+
+namespace MinimalApi.Dominio.ModelViews;
+
+public record AdminLogado{
+
+    public string Token { get; set; }
+    public string Email { get; set; } = default!;
+    public string Perfil { get; set;  } = default!;
+
+}
