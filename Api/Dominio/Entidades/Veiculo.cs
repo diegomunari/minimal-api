@@ -16,5 +16,5 @@ public class Veiculo {
     [StringLength(50 )] 
     public string Marca { get; set; }
 
-     public int Ano { get; set; }
+    public int Ano { get; set; }
 }

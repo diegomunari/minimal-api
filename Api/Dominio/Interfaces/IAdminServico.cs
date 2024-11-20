@@ -6,9 +6,9 @@ namespace MinimalApi.Dominio.Interfaces;
 public interface IAdminServico {
 
     Admin? Login(LoginDTO loginDTO);
-    void Incluir(Admin veiculo);
-    void Alterar(Admin veiculo);
-    void Apagar(Admin veiculo);
+    void Incluir(Admin admin);
+    void Alterar(Admin admin);
+    void Apagar(Admin admin);
     List<Admin> GetAll();
     Admin GetById(int id);
 }
